@@ -69,13 +69,13 @@ const { text } = await generateText({
 
 ```typescript
 import { runcrate } from '@runcrate/ai';
-import { generateObject } from 'ai';
+import { generateText, Output } from 'ai';
 import { z } from 'zod';
 
-const { object } = await generateObject({
+const { output } = await generateText({
   model: runcrate('deepseek-ai/DeepSeek-V3'),
-  schema: z.object({
-    recipe: z.object({
+  output: Output.object({
+    schema: z.object({
       name: z.string(),
       ingredients: z.array(z.string()),
       steps: z.array(z.string()),
@@ -84,14 +84,14 @@ const { object } = await generateObject({
   prompt: 'Generate a recipe for chocolate chip cookies.',
 });
 
-console.log(object.recipe);
+console.log(output);
 ```
 
 ### Image Generation
 
 ```typescript
 import { runcrate } from '@runcrate/ai';
-import { experimental_generateImage as generateImage } from 'ai';
+import { generateImage } from 'ai';
 
 const { image } = await generateImage({
   model: runcrate.imageModel('black-forest-labs/FLUX.1-schnell'),

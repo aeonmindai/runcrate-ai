@@ -31,16 +31,16 @@
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.0",
     "@ai-sdk/provider": "^3.0.0",
-    "@ai-sdk/provider-utils": "^3.0.0"
+    "@ai-sdk/provider-utils": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "vitest": "^1.0.0"
+    "typescript": "^6.0.2",
+    "vitest": "^4.0.0"
   },
   "peerDependencies": {
-    "ai": ">=3.0.0"
+    "ai": ">=6.0.0"
   },
   "keywords": [
     "ai-sdk",
