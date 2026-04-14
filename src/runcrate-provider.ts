@@ -5,10 +5,10 @@ import {
   OpenAICompatibleImageModel,
 } from '@ai-sdk/openai-compatible';
 import {
-  EmbeddingModelV1,
-  ImageModelV1,
-  LanguageModelV1,
-  ProviderV1,
+  EmbeddingModelV3,
+  ImageModelV3,
+  LanguageModelV3,
+  ProviderV3,
 } from '@ai-sdk/provider';
 import {
   FetchFunction,
@@ -51,35 +51,35 @@ export interface RuncrateProviderSettings {
 
 // ─── Provider Interface ────────────────────────────────────────────────────
 
-export interface RuncrateProvider extends ProviderV1 {
+export interface RuncrateProvider extends ProviderV3 {
   /**
    * Creates a chat model for text generation.
    *
    * @param modelId - The model ID (e.g., 'deepseek-ai/DeepSeek-V3', 'meta-llama/Llama-3.3-70B-Instruct')
    * @param settings - Optional model settings
    */
-  (modelId: RuncrateChatModelId, settings?: RuncrateChatSettings): LanguageModelV1;
+  (modelId: RuncrateChatModelId, settings?: RuncrateChatSettings): LanguageModelV3;
 
   /**
    * Creates a chat model for text generation.
    */
-  chatModel(modelId: RuncrateChatModelId, settings?: RuncrateChatSettings): LanguageModelV1;
+  chatModel(modelId: RuncrateChatModelId, settings?: RuncrateChatSettings): LanguageModelV3;
 
   /**
    * Creates a completion model for text generation.
    */
-  completionModel(modelId: RuncrateChatModelId, settings?: RuncrateChatSettings): LanguageModelV1;
+  completionModel(modelId: RuncrateChatModelId, settings?: RuncrateChatSettings): LanguageModelV3;
 
   /**
    * Creates an embedding model.
    */
-  embeddingModel(modelId: RuncrateEmbeddingModelId, settings?: RuncrateEmbeddingSettings): EmbeddingModelV1<string>;
+  embeddingModel(modelId: RuncrateEmbeddingModelId, settings?: RuncrateEmbeddingSettings): EmbeddingModelV3;
 
   /**
    * Creates a text embedding model.
    * @deprecated Use `embeddingModel` instead.
    */
-  textEmbeddingModel(modelId: RuncrateEmbeddingModelId, settings?: RuncrateEmbeddingSettings): EmbeddingModelV1<string>;
+  textEmbeddingModel(modelId: RuncrateEmbeddingModelId, settings?: RuncrateEmbeddingSettings): EmbeddingModelV3;
 
   /**
    * Creates an image generation model.
@@ -87,7 +87,7 @@ export interface RuncrateProvider extends ProviderV1 {
    * @param modelId - The model ID (e.g., 'black-forest-labs/FLUX.1-schnell')
    * @param settings - Optional model settings
    */
-  imageModel(modelId: RuncrateImageModelId, settings?: RuncrateImageSettings): ImageModelV1;
+  imageModel(modelId: RuncrateImageModelId, settings?: RuncrateImageSettings): ImageModelV3;
 }
 
 // ─── Provider Factory ──────────────────────────────────────────────────────
@@ -135,33 +135,32 @@ export function createRuncrate(
 
   const createChatModel = (
     modelId: RuncrateChatModelId,
-    settings: RuncrateChatSettings = {},
-  ): LanguageModelV1 =>
-    new OpenAICompatibleChatLanguageModel(modelId, settings, {
+    _settings: RuncrateChatSettings = {},
+  ): LanguageModelV3 =>
+    new OpenAICompatibleChatLanguageModel(modelId, {
       ...getCommonModelConfig('chat'),
-      defaultObjectGenerationMode: 'json',
     });
 
   const createCompletionModel = (
     modelId: RuncrateChatModelId,
-    settings: RuncrateChatSettings = {},
-  ): LanguageModelV1 =>
-    new OpenAICompatibleCompletionLanguageModel(modelId, settings, {
+    _settings: RuncrateChatSettings = {},
+  ): LanguageModelV3 =>
+    new OpenAICompatibleCompletionLanguageModel(modelId, {
       ...getCommonModelConfig('completion'),
     });
 
   const createEmbeddingModel = (
     modelId: RuncrateEmbeddingModelId,
-    settings: RuncrateEmbeddingSettings = {},
-  ): EmbeddingModelV1<string> =>
-    new OpenAICompatibleEmbeddingModel(modelId, settings, {
+    _settings: RuncrateEmbeddingSettings = {},
+  ): EmbeddingModelV3 =>
+    new OpenAICompatibleEmbeddingModel(modelId, {
       ...getCommonModelConfig('embedding'),
     });
 
   const createImageModel = (
     modelId: RuncrateImageModelId,
     _settings: RuncrateImageSettings = {},
-  ): ImageModelV1 =>
+  ): ImageModelV3 =>
     new OpenAICompatibleImageModel(modelId, {
       ...getCommonModelConfig('image'),
     });
