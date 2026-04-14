@@ -69,15 +69,17 @@ const { text } = await generateText({
 
 ```typescript
 import { runcrate } from '@runcrate/ai';
-import { generateText } from 'ai';
+import { generateText, Output } from 'ai';
 import { z } from 'zod';
 
 const { output } = await generateText({
   model: runcrate('deepseek-ai/DeepSeek-V3'),
-  output: z.object({
-    name: z.string(),
-    ingredients: z.array(z.string()),
-    steps: z.array(z.string()),
+  output: Output.object({
+    schema: z.object({
+      name: z.string(),
+      ingredients: z.array(z.string()),
+      steps: z.array(z.string()),
+    }),
   }),
   prompt: 'Generate a recipe for chocolate chip cookies.',
 });
