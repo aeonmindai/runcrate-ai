@@ -1,6 +1,6 @@
 {
   "name": "@runcrate/ai",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Runcrate provider for Vercel AI SDK",
   "license": "MIT",
   "type": "module",
