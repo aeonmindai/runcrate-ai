@@ -1,6 +1,6 @@
-# @runcrate/ai
+# [@runcrate/ai](https://runcrate.ai)
 
-Runcrate provider for the [Vercel AI SDK](https://ai-sdk.dev).
+[Runcrate](https://runcrate.ai) provider for the [Vercel AI SDK](https://ai-sdk.dev).
 
 ## Installation
 
